@@ -27,38 +27,30 @@ function ContactForm() {
       }}
       validationSchema={ContactFormSchema}
       onSubmit={(values, actions) => {
-        dispatch(addContact(values));
-        actions.setSubmitting(false);
+        dispatch(addContact(values.name, values.number));
         actions.resetForm();
       }}
     >
-      {({ isSubmitting }) => (
-        <Form className={css.form}>
-          <label className={css.label} htmlFor={nameFieldId}>
-            Name
-          </label>
-          <Field
-            className={css.input}
-            type="text"
-            name="name"
-            id={nameFieldId}
-          />
-          <ErrorMessage className={css.error} name="name" component="span" />
-          <label className={css.label} htmlFor={numberFieldId}>
-            Number
-          </label>
-          <Field
-            className={css.input}
-            type="tel"
-            name="number"
-            id={numberFieldId}
-          />
-          <ErrorMessage className={css.error} name="number" component="span" />
-          <button className={css.btn} type="submit" disabled={isSubmitting}>
-            Add contact
-          </button>
-        </Form>
-      )}
+      <Form className={css.form}>
+        <label className={css.label} htmlFor={nameFieldId}>
+          Name
+        </label>
+        <Field className={css.input} type="text" name="name" id={nameFieldId} />
+        <ErrorMessage className={css.error} name="name" component="span" />
+        <label className={css.label} htmlFor={numberFieldId}>
+          Number
+        </label>
+        <Field
+          className={css.input}
+          type="tel"
+          name="number"
+          id={numberFieldId}
+        />
+        <ErrorMessage className={css.error} name="number" component="span" />
+        <button className={css.btn} type="submit">
+          Add contact
+        </button>
+      </Form>
     </Formik>
   );
 }

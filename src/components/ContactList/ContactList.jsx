@@ -5,10 +5,14 @@ import { selectNameFilter } from "../../redux/filtersSlice";
 import css from "./ContactList.module.css";
 
 const getVisibleContacts = (contacts, statusFilter) => {
-  return contacts.filter((contact) =>
-    contact.name.toLowerCase().includes(statusFilter)
-  );
+  return contacts.filter((contact) => {
+    if (typeof contact.name === "string") {
+      return contact.name.toLowerCase().includes(statusFilter.toLowerCase());
+    }
+    return false;
+  });
 };
+
 function ContactList() {
   const contacts = useSelector(selectContacts);
   const statusFilter = useSelector(selectNameFilter);
